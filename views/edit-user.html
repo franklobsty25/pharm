@@ -1,0 +1,103 @@
+{% extends "sub-layout.html" %} 
+
+{% block heading %}
+<div class="page-header">
+  <h3 class="page-title">Edit user credential</h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> Account </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %} 
+
+{% block content %}
+<div id="loading" class="row">
+  <div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Edit user</h4>
+        <div id="user-success-message" class="alert alert-success" role="alert" style="display:none;"></div>
+        <div id="user-error-message" class="alert alert-danger" role="alert" style="display:none;"></div>
+        <form class="forms-sample">
+          <div class="form-group">
+            <label for="firstname">Firstname</label>
+            <input
+              type="text"
+              class="form-control"
+              name="edit-firstname"
+              placeholder="Firstname"
+            />
+            <small id="edit-firstnameError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="middlename">Middlename</label>
+            <input
+              type="text"
+              class="form-control"
+              name="edit-middlename"
+              placeholder="Middlename"
+            />
+          </div>
+          <div class="form-group">
+            <label for="lastname">Lastname</label>
+            <input
+              type="text"
+              class="form-control"
+              name="edit-lastname"
+              placeholder="Lastname"
+            />
+            <small id="edit-lastnameError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              name="edit-email"
+              placeholder="Email"
+              disabled
+            />
+            <small id="edit-emailError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Phone number</label>
+            <input
+              type="text"
+              class="form-control"
+              name="edit-phoneNumber"
+              placeholder="Phone number"
+            />
+            <small id="edit-phoneNumberError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label>Assign role</label>
+            <select id="edit-role" class="js-example-basic-single" style="width: 100%">
+              <option value="">Please assign a role</option>
+              {% for role in roles %}
+              <option value="{{ role }}">{{ role | capitalize }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button id="edit-user" type="submit" class="btn btn-primary mr-2"> Update </button>
+          <div id="user-loading" class="spinner-border text-primary" role="status" style="display:none;">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <button class="btn btn-light">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="footer">
+  <div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"
+      >Copyright © {{year}}</span
+    >
+  </div>
+</footer>
+{% endblock %}

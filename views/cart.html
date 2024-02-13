@@ -1,0 +1,167 @@
+{% extends "sub-layout.html" %} 
+
+{% block heading %}
+<div class="page-header">
+  <h3 class="page-title">Cart</h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> Cart </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %} 
+
+{% block content %}
+<div class="row">
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Purchase product</h4>
+        <div
+          id="cart-success-message"
+          class="alert alert-success"
+          role="alert"
+          style="display: none"
+        ></div>
+        <div
+          id="cart-error-message"
+          class="alert alert-danger"
+          role="alert"
+          style="display: none"
+        ></div>
+        <form class="forms-sample">
+          <div class="form-group">
+            <label>Products to Buy</label>
+            <select
+              id="select-product"
+              class="js-example-basic-single"
+              style="width: 100%"
+            >
+              <option value="">Please select a product</option>
+              {% for product in products %}
+              <option value="{{ product._id }}"
+                >{{ product.name }} | {{ product.quantityDifference }}</option
+              >
+              {% endfor %}
+            </select>
+            <small id="cartProductError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="unitPrice">Product price</label>
+            <input
+              type="number"
+              class="form-control"
+              id="unitPrice"
+              name="cart-unitPrice"
+              placeholder="unitPrice"
+              disabled
+            />
+            <small id="cartUnitPriceError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="quantity">Product quantity</label>
+            <input
+              type="number"
+              class="form-control"
+              id="quantity"
+              name="cart-quantity"
+              placeholder="Quantity"
+            />
+            <small id="cartQuantityError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="description">Product description</label>
+            <textarea
+              type="text"
+              class="form-control"
+              id="description"
+              name="cart-description"
+              placeholder="Product description"
+              rows="16"
+            ></textarea>
+          </div>
+          <button id="add-to-cart" type="submit" class="btn btn-primary mr-2">
+            Add to cart
+          </button>
+          <div id="add-loading" class="spinner-border text-primary" role="status" style="display:none;">
+              <span class="sr-only">Loading...</span>
+          </div>
+          <button class="btn btn-light">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="hide-cart-table"
+    class="col-md-8 grid-margin stretch-card"
+    style="display: none"
+  >
+    <div class="card">
+      <div class="card-body flex-wrap">
+        <div class="page-header flex-wrap">
+          <h4 id="customer-name" class="card-title"></h4>
+          <div
+            id="order-error-message"
+            class="alert alert-danger"
+            role="alert"
+            style="display: none"
+          ></div>
+          <div class="d-flex">
+            <button
+              id="grandTotal"
+              class="btn btn-sm ml-3 btn-danger"
+              style="display: none"
+            >
+            </button>
+            <div id="payment-loading" class="spinner-border text-danger" role="status" style="display:none;">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <input type="number" name="grandTotal" style="display: none" />
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table
+            id="customer-carts"
+            class="table table-hover table-borderless"
+            style="width: 100%"
+          >
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Total Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Jacob</td>
+                <td>Photoshop</td>
+                <td class="text-danger">
+                  28.76% <i class="mdi mdi-arrow-down"></i>
+                </td>
+                <td>
+                  <label class="badge badge-danger">Pending</label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 
+
+{% block footer %}
+<footer class="footer">
+  <div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"
+      >Copyright © {{year}}</span
+    >
+  </div>
+</footer>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "sub-layout.html" %} 
+
+{% block heading %}
+<div class="page-header">
+  <h3 class="page-title">Audit Logs</h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> Audit Logs </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %} 
+
+{% block content %}
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Audit Logs</h4>
+        <div class="table-responsive">
+          <table id="audits" class="table table-bordered" style="width: 100%;">
+            <thead>
+              <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Phone number</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Action taken</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="footer" style="padding-top: 3%">
+  <div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"
+      >Copyright © {{year}}</span
+    >
+  </div>
+</footer>
+{% endblock %}

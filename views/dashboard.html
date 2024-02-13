@@ -1,0 +1,797 @@
+{% extends "layout.html" %} 
+
+{%block main %}
+<div id="loading" class="content-wrapper pb-0" id="user-account">
+  <div class="page-header flex-wrap">
+    <h3 class="mb-0"> Hi, welcome back! </h3>
+    <div class="d-flex">
+      <a id="dashboard-user-account" href="/user" class="btn btn-sm ml-3 btn-success">
+        Create user account
+      </a>
+    </div>
+  </div>
+  <div id="dashboard-stats" class="row">
+    <div class="col-xl-3 col-lg-12 stretch-card grid-margin">
+      <div class="row">
+        <div
+          class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3"
+        >
+          <div class="card bg-warning">
+            <div class="card-body px-3 py-4">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="color-card">
+                  <p class="mb-0 color-card-head">Suppliers</p>
+                  <h2 id="suppliers-count" class="text-white">
+                  </h2>
+                </div>
+                <i
+                  class="card-icon-indicator mdi mdi-basket bg-inverse-icon-warning"
+                ></i>
+              </div>
+              <!-- <h6 class="text-white">18.33% Since last month</h6> -->
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3"
+        >
+          <div class="card bg-danger">
+            <div class="card-body px-3 py-4">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="color-card">
+                  <p class="mb-0 color-card-head">Locations</p>
+                  <h2 id="locations-count" class="text-white">
+                  </h2>
+                </div>
+                <i
+                  class="card-icon-indicator mdi mdi-cube-outline bg-inverse-icon-danger"
+                ></i>
+              </div>
+              <!-- <h6 class="text-white">13.21% Since last month</h6> -->
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3 pb-lg-0 pb-xl-3"
+        >
+          <div class="card bg-primary">
+            <div class="card-body px-3 py-4">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="color-card">
+                  <p class="mb-0 color-card-head">Products</p>
+                  <h2 id="products-count" class="text-white">
+                  </h2>
+                </div>
+                <i
+                  class="card-icon-indicator mdi mdi-briefcase-outline bg-inverse-icon-primary"
+                ></i>
+              </div>
+              <!-- <h6 class="text-white">67.98% Since last month</h6> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-12 col-md-6 stretch-card pb-sm-3 pb-lg-0">
+          <div class="card bg-success">
+            <div class="card-body px-3 py-4">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="color-card">
+                  <p class="mb-0 color-card-head">Orders</p>
+                  <h2 id="orders-count" class="text-white"></h2>
+                </div>
+                <i
+                  class="card-icon-indicator mdi mdi-account-circle bg-inverse-icon-success"
+                ></i>
+              </div>
+              <!-- <h6 class="text-white">20.32% Since last month</h6> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-9 stretch-card grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-7">
+              <h5>Overview</h5>
+              <p class="text-muted">
+                Show overview
+                <a class="text-muted font-weight-medium pl-2" href="transactions"
+                  ><u>See Details</u></a
+                >
+              </p>
+            </div>
+            <div class="col-sm-5 text-md-right">
+              <button
+                type="button"
+                class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal"
+              >
+                <i class="mdi mdi-email btn-icon-prepend"></i>Download Report
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="card mb-3 mb-sm-0">
+                <div class="card-body py-3 px-4">
+                  <p class="m-0 survey-head">Today revenues</p>
+                  <div
+                    class="d-flex justify-content-between align-items-end flot-bar-wrapper"
+                  >
+                    <div>
+                      <h3 id="today-orders" class="m-0 survey-value"></h3>
+                      <p id="today-trend" class="m-0"></p>
+                    </div>
+                    <div id="earningChart" class="flot-chart"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card mb-3 mb-sm-0">
+                <div class="card-body py-3 px-4">
+                  <p class="m-0 survey-head">Monthly revenues</p>
+                  <div
+                    class="d-flex justify-content-between align-items-end flot-bar-wrapper"
+                  >
+                    <div>
+                      <h3 id="month-orders" class="m-0 survey-value"></h3>
+                      <p id="month-trend" class="m-0"></p>
+                    </div>
+                    <div id="productChart" class="flot-chart"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card">
+                <div class="card-body py-3 px-4">
+                  <p class="m-0 survey-head">Quarterly revenues</p>
+                  <div
+                    class="d-flex justify-content-between align-items-end flot-bar-wrapper"
+                  >
+                    <div>
+                      <h3 id="quarter-orders" class="m-0 survey-value"></h3>
+                      <p id="quarter-trend" class="m-0">-</p>
+                    </div>
+                    <div id="orderChart" class="flot-chart"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col-sm-12">
+              <div class="row">
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Stocks chart</h4>
+                    <canvas id="lineChart" style="height: 250px;"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Revenues chart</h4>
+                    <canvas id="doughnutChart" style="height: 250px;"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-8">
+              <p class="text-muted mb-0">
+              </p>
+            </div>
+            <div id="bi-year-visible" class="col-sm-4">
+              <p class="mb-0 text-muted">Sales Revenue</p>
+              <h5 id="bi-year" class="d-inline-block survey-value mb-0"></h5>
+              <p class="d-inline-block text-danger mb-0"> last 6 months </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="toggle-product-history" class="row" style="display: none;">
+    <div class="col-xl-12 col-sm-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title pl-4">Stock History</h4>
+          <div class="table-responsive">
+            <table id="product-history" class="table table-borderless" style="width: 100%">
+              <thead class="bg-light">
+                <tr>
+                  <th>Product</th>
+                  <th>Unit Price</th>
+                  <th>Quantity</th>
+                  <th>Quantity Sold</th>
+                  <th>Quantity Leftover</th>
+                  <th>Expire Date</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row">
+    <div class="col-xl-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-black">To do Task List</h4>
+          <p class="text-muted">Created by anonymous</p>
+          <div class="list-wrapper">
+            <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+              <li>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="checkbox" type="checkbox" /> Meeting with
+                    Alisa
+                  </label>
+                  <span class="list-time">4 Hours Ago</span>
+                </div>
+              </li>
+              <li>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="checkbox" type="checkbox" /> Create invoice
+                  </label>
+                  <span class="list-time">6 Hours Ago</span>
+                </div>
+              </li>
+              <li class="completed">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="checkbox" type="checkbox" checked />
+                    Prepare for presentation
+                  </label>
+                  <span class="list-time">2 Hours Ago</span>
+                </div>
+              </li>
+              <li>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="checkbox" type="checkbox" /> Pick up kids from
+                    school
+                  </label>
+                  <span class="list-time">8 Hours Ago</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="add-items d-flex flex-wrap flex-sm-nowrap">
+            <input
+              type="text"
+              class="form-control todo-list-input flex-grow"
+              placeholder="Add task name"
+            />
+            <button
+              class="add btn btn-primary font-weight-regular text-nowrap"
+              id="add-task"
+            >
+              Add Task
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-black">Recent Customers</h4>
+          <p class="text-muted">All contacts</p>
+          <div class="row pt-2 pb-1">
+            <div class="col-12 col-sm-7">
+              <div class="row">
+                <div class="col-4 col-md-4">
+                  <img
+                    class="customer-img"
+                    src="stylesheets/assets/images/faces/face22.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="col-8 col-md-8 p-sm-0">
+                  <h6 class="mb-0">Cecelia Cooper</h6>
+                  <p class="text-muted font-12">05:58AM</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-5 pl-0">
+              <canvas id="areaChart1"></canvas>
+            </div>
+          </div>
+          <div class="row py-1">
+            <div class="col-sm-7">
+              <div class="row">
+                <div class="col-4 col-sm-4">
+                  <img
+                    class="customer-img"
+                    src="stylesheets/assets/images/faces/face25.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="col-8 col-sm-8 p-sm-0">
+                  <h6 class="mb-0">Victor Watkins</h6>
+                  <p class="text-muted font-12">05:28AM</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-5 pl-0">
+              <canvas id="areaChart2"></canvas>
+            </div>
+          </div>
+          <div class="row py-1">
+            <div class="col-sm-7">
+              <div class="row">
+                <div class="col-4 col-sm-4">
+                  <img
+                    class="customer-img"
+                    src="stylesheets/assets/images/faces/face15.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="col-8 col-sm-8 p-sm-0">
+                  <h6 class="mb-0">Ada Burgess</h6>
+                  <p class="text-muted font-12">05:57AM</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-5 pl-0">
+              <canvas id="areaChart3"></canvas>
+            </div>
+          </div>
+          <div class="row py-1">
+            <div class="col-sm-7">
+              <div class="row">
+                <div class="col-4 col-sm-4">
+                  <img
+                    class="customer-img"
+                    src="stylesheets/assets/images/faces/face5.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="col-8 col-sm-8 p-sm-0">
+                  <h6 class="mb-0">Dollie Lynch</h6>
+                  <p class="text-muted font-12">05:59AM</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-5 pl-0">
+              <canvas id="areaChart4"></canvas>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-7">
+              <div class="row">
+                <div class="col-4 col-sm-4">
+                  <img
+                    class="customer-img"
+                    src="stylesheets/assets/images/faces/face2.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="col-8 col-sm-8 p-sm-0">
+                  <h6 class="mb-0">Harry Holloway</h6>
+                  <p class="text-muted font-12 mb-0">05:13AM</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-5 pl-0">
+              <canvas id="areaChart5" height="100"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-black">Business Survey</h4>
+          <p class="text-muted pb-2">Jan 01 2019 - Dec 31 2019</p>
+          <canvas id="surveyBar"></canvas>
+          <div class="row border-bottom pb-3 pt-4 align-items-center mx-0">
+            <div class="col-sm-9 pl-0">
+              <div class="d-flex">
+                <img
+                  src="stylesheets/assets/images/dashboard/img_4.jpg"
+                  alt=""
+                />
+                <div class="pl-2">
+                  <h6 class="m-0">Red Chair</h6>
+                  <p class="m-0">Home Decoration</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 pl-0 pl-sm-3">
+              <div class="badge badge-inverse-success mt-3 mt-sm-0">
+                +7.7%
+              </div>
+            </div>
+          </div>
+          <div class="row py-3 align-items-center mx-0">
+            <div class="col-sm-9 pl-0">
+              <div class="d-flex">
+                <img
+                  src="stylesheets/assets/images/dashboard/img_5.jpg"
+                  alt=""
+                />
+                <div class="pl-2">
+                  <h6 class="m-0">Gray Sofa</h6>
+                  <p class="m-0">Home Decoration</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 pl-0 pl-sm-3">
+              <div class="badge badge-inverse-success mt-3 mt-sm-0">
+                +7.7%
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="row">
+    <!-- <div class="col-xl-4 col-md-6 grid-margin stretch-card">
+      <div class="card card-invoice">
+        <div class="card-body">
+          <h4 class="card-title pb-3">Pending invoices</h4>
+          <div class="list-card">
+            <div class="row align-items-center">
+              <div class="col-7 col-sm-8">
+                <div class="row align-items-center">
+                  <div class="col-sm-4">
+                    <img
+                      src="stylesheets/assets/images/faces/face2.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-sm-8 pr-0 pl-sm-0">
+                    <span>06 Jan 2019</span>
+                    <h6 class="mb-1 mb-sm-0">Isabel Cross</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5 col-sm-4">
+                <div class="d-flex pt-1 align-items-center">
+                  <div class="reload-outer bg-info">
+                    <i class="mdi mdi-reload"></i>
+                  </div>
+                  <div class="dropdown dropleft pl-1 pt-3">
+                    <div
+                      id="dropdownMenuButton2"
+                      data-toggle="dropdown"
+                      role="button"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <p><i class="mdi mdi-dots-vertical"></i></p>
+                    </div>
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton2"
+                    >
+                      <a class="dropdown-item" href="#">Sales</a>
+                      <a class="dropdown-item" href="#">Track Invoice</a>
+                      <a class="dropdown-item" href="#">Payment History</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="list-card">
+            <div class="row align-items-center">
+              <div class="col-7 col-sm-8">
+                <div class="row align-items-center">
+                  <div class="col-sm-4">
+                    <img
+                      src="stylesheets/assets/images/faces/face3.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-sm-8 pr-0 pl-sm-0">
+                    <span>18 Mar 2019</span>
+                    <h6 class="mb-1 mb-sm-0">Carrie Parker</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5 col-sm-4">
+                <div class="d-flex pt-1 align-items-center">
+                  <div class="reload-outer bg-primary">
+                    <i class="mdi mdi-reload"></i>
+                  </div>
+                  <div class="dropdown dropleft pl-1 pt-3">
+                    <div
+                      id="dropdownMenuButton3"
+                      data-toggle="dropdown"
+                      role="button"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <p><i class="mdi mdi-dots-vertical"></i></p>
+                    </div>
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton3"
+                    >
+                      <a class="dropdown-item" href="#">Sales</a>
+                      <a class="dropdown-item" href="#">Track Invoice</a>
+                      <a class="dropdown-item" href="#">Payment History</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="list-card">
+            <div class="row align-items-center">
+              <div class="col-7 col-sm-8">
+                <div class="row align-items-center">
+                  <div class="col-sm-4">
+                    <img
+                      src="stylesheets/assets/images/faces/face11.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-sm-8 pr-0 pl-sm-0">
+                    <span>10 Apr 2019</span>
+                    <h6 class="mb-1 mb-sm-0">Don Bennett</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5 col-sm-4">
+                <div class="d-flex pt-1 align-items-center">
+                  <div class="reload-outer bg-warning">
+                    <i class="mdi mdi-reload"></i>
+                  </div>
+                  <div class="dropdown dropleft pl-1 pt-3">
+                    <div
+                      id="dropdownMenuButton4"
+                      data-toggle="dropdown"
+                      role="button"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <p><i class="mdi mdi-dots-vertical"></i></p>
+                    </div>
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton4"
+                    >
+                      <a class="dropdown-item" href="#">Sales</a>
+                      <a class="dropdown-item" href="#">Track Invoice</a>
+                      <a class="dropdown-item" href="#">Payment History</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="list-card">
+            <div class="row align-items-center">
+              <div class="col-7 col-sm-8">
+                <div class="row align-items-center">
+                  <div class="col-sm-4">
+                    <img
+                      src="stylesheets/assets/images/faces/face3.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-sm-8 pr-0 pl-sm-0">
+                    <span>18 Mar 2019</span>
+                    <h6 class="mb-1 mb-sm-0">Carrie Parker</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5 col-sm-4">
+                <div class="d-flex pt-1 align-items-center">
+                  <div class="reload-outer bg-info">
+                    <i class="mdi mdi-reload"></i>
+                  </div>
+                  <div class="dropdown dropleft pl-1 pt-3">
+                    <div
+                      id="dropdownMenuButton5"
+                      data-toggle="dropdown"
+                      role="button"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <p><i class="mdi mdi-dots-vertical"></i></p>
+                    </div>
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton5"
+                    >
+                      <a class="dropdown-item" href="#">Sales</a>
+                      <a class="dropdown-item" href="#">Track Invoice</a>
+                      <a class="dropdown-item" href="#">Payment History</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!--activity-->
+    <!-- <div class="col-xl-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">
+            <span class="d-flex justify-content-between">
+              <span>Activity1</span>
+              <span class="dropdown dropleft d-block">
+                <span
+                  id="dropdownMenuButton1"
+                  data-toggle="dropdown"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span><i class="mdi mdi-dots-horizontal"></i></span>
+                </span>
+                <span
+                  class="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton1"
+                >
+                  <a class="dropdown-item" href="#">Contact</a>
+                  <a class="dropdown-item" href="#">Helpdesk</a>
+                  <a class="dropdown-item" href="#">Chat with us</a>
+                </span>
+              </span>
+            </span>
+          </h4>
+          <ul class="gradient-bullet-list border-bottom">
+            <li>
+              <h6 class="mb-0"> It's awesome when we find a new solution </h6>
+              <p class="text-muted">2h ago</p>
+            </li>
+            <li>
+              <h6 class="mb-0">Report has been updated</h6>
+              <p class="text-muted">
+                <span>2h ago</span>
+                <span class="d-inline-block">
+                  <span class="d-flex d-inline-block">
+                    <img
+                      class="ml-1"
+                      src="stylesheets/assets/images/faces/face1.jpg"
+                      alt=""
+                    />
+                    <img
+                      class="ml-1"
+                      src="stylesheets/assets/images/faces/face10.jpg"
+                      alt=""
+                    />
+                    <img
+                      class="ml-1"
+                      src="stylesheets/assets/images/faces/face14.jpg"
+                      alt=""
+                    />
+                  </span>
+                </span>
+              </p>
+            </li>
+            <li>
+              <h6 class="mb-0"> Analytics dashboard has been created#Slack </h6>
+              <p class="text-muted">2h ago</p>
+            </li>
+            <li>
+              <h6 class="mb-0"> It's awesome when we find a new solution </h6>
+              <p class="text-muted">2h ago</p>
+            </li>
+          </ul>
+          <a class="text-black mt-3 mb-0 d-block h6" href="#"
+            >View all <i class="mdi mdi-chevron-right"></i
+          ></a>
+        </div>
+      </div>
+    </div> -->
+    <!--activity ends-->
+    <!--browser stats-->
+    <!-- <div class="col-xl-4 col-md-6 stretch-card grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Browser stats</h4>
+          <div class="row py-2">
+            <div class="col-sm-12">
+              <div class="d-flex justify-content-between pb-3 border-bottom">
+                <div>
+                  <img
+                    class="mr-2"
+                    src="stylesheets/assets/images/browser-logo/opera-logo.png"
+                    alt=""
+                  />
+                  <span class="p">opera mini</span>
+                </div>
+                <p class="mb-0">23%</p>
+              </div>
+            </div>
+          </div>
+          <div class="row py-2">
+            <div class="col-sm-12">
+              <div class="d-flex justify-content-between pb-3 border-bottom">
+                <div>
+                  <img
+                    class="mr-2"
+                    src="stylesheets/assets/images/browser-logo/safari-logo.png"
+                    alt=""
+                  />
+                  <span class="p">Safari</span>
+                </div>
+                <p class="mb-0">07%</p>
+              </div>
+            </div>
+          </div>
+          <div class="row py-2">
+            <div class="col-sm-12">
+              <div class="d-flex justify-content-between pb-3 border-bottom">
+                <div>
+                  <img
+                    class="mr-2"
+                    src="stylesheets/assets/images/browser-logo/chrome-logo.png"
+                    alt=""
+                  />
+                  <span class="p">Chrome</span>
+                </div>
+                <p class="mb-0">33%</p>
+              </div>
+            </div>
+          </div>
+          <div class="row py-2">
+            <div class="col-sm-12">
+              <div class="d-flex justify-content-between pb-3 border-bottom">
+                <div>
+                  <img
+                    class="mr-2"
+                    src="stylesheets/assets/images/browser-logo/firefox-logo.png"
+                    alt=""
+                  />
+                  <span class="p">Firefox</span>
+                </div>
+                <p class="mb-0">17%</p>
+              </div>
+            </div>
+          </div>
+          <div class="row py-2">
+            <div class="col-sm-12">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <img
+                    class="mr-2"
+                    src="stylesheets/assets/images/browser-logo/explorer-logo.png"
+                    alt=""
+                  />
+                  <span class="p">Explorer</span>
+                </div>
+                <p class="mb-0">05%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!--browser stats ends-->
+  </div>
+
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="footer">
+  <div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"
+      >Copyright © {{year}}</span
+    >
+  </div>
+</footer>
+{% endblock %}

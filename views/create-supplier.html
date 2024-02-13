@@ -1,0 +1,134 @@
+{% extends "sub-layout.html" %} 
+
+{% block heading %}
+<div class="page-header">
+  <h3 class="page-title">Supplier</h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> Supplier </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %} 
+
+{% block content %}
+<div id="loading" class="row">
+  <div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Add new supplier</h4>
+        <div
+          id="supplier-success-message"
+          class="alert alert-success"
+          role="alert"
+          style="display: none"
+        ></div>
+        <div
+          id="supplier-error-message"
+          class="alert alert-danger"
+          role="alert"
+          style="display: none"
+        ></div>
+        <form class="forms-sample">
+          <div class="form-group">
+            <label for="firstname">Firstname</label>
+            <input
+              type="text"
+              class="form-control"
+              name="supplier-firstname"
+              placeholder="Firstname"
+            />
+            <small id="supplierFirstnameError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="middlename">Middlename</label>
+            <input
+              type="text"
+              class="form-control"
+              name="supplier-middlename"
+              placeholder="Middlename"
+            />
+          </div>
+          <div class="form-group">
+            <label for="lastname">Lastname</label>
+            <input
+              type="text"
+              class="form-control"
+              name="supplier-lastname"
+              placeholder="Lastname"
+            />
+            <small id="supplierLastnameError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Phone number</label>
+            <input
+              type="text"
+              class="form-control"
+              name="supplier-phoneNumber"
+              placeholder="Phone number"
+            />
+            <small id="supplierPhoneNumberError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              name="supplier-email"
+              placeholder="Email address"
+            />
+            <small id="supplierEmailError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea
+              type="text"
+              class="form-control"
+              name="supplier-address"
+              placeholder="Address"
+              rows="5"
+            ></textarea>
+            <small id="supplierAddressError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="address2">Address 2</label>
+            <textarea
+              type="text"
+              class="form-control"
+              name="supplier-address2"
+              placeholder="Address 2"
+            ></textarea>
+          </div>
+          <button
+            id="create-supplier"
+            type="submit"
+            class="btn btn-primary mr-2"
+          >
+            Submit
+          </button>
+          <div
+            id="supplier-loading"
+            class="spinner-border text-primary"
+            role="status"
+            style="display: none"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+          <button class="btn btn-light">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 
+
+{% block footer %}
+<footer class="footer">
+  <div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"
+      >Copyright © {{year}}</span
+    >
+  </div>
+</footer>
+{% endblock %}

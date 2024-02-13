@@ -1,0 +1,122 @@
+{% extends "sub-layout.html" %} 
+
+{% block heading %}
+<div class="page-header">
+  <h3 class="page-title">Create user account</h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> Account </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %} 
+
+{% block content %}
+<div id="loading" class="row">
+  <div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Create new account</h4>
+        <div id="user-success-message" class="alert alert-success" role="alert" style="display:none;"></div>
+        <div id="user-error-message" class="alert alert-danger" role="alert" style="display:none;"></div>
+        <form class="forms-sample">
+          <div class="form-group">
+            <label for="firstname">Firstname</label>
+            <input
+              type="text"
+              class="form-control"
+              name="firstname"
+              placeholder="Firstname"
+            />
+            <small id="firstnameError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="middlename">Middlename</label>
+            <input
+              type="text"
+              class="form-control"
+              name="middlename"
+              placeholder="Middlename"
+            />
+          </div>
+          <div class="form-group">
+            <label for="lastname">Lastname</label>
+            <input
+              type="text"
+              class="form-control"
+              name="lastname"
+              placeholder="Lastname"
+            />
+            <small id="lastnameError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              placeholder="Email"
+            />
+            <small id="emailError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Phone number</label>
+            <input
+              type="text"
+              class="form-control"
+              name="phoneNumber"
+              placeholder="Phone number"
+            />
+            <small id="phoneNumberError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              placeholder="Password"
+            />
+            <small id="passwordError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="repeatPassword">Confirm password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="repeatPassword"
+              placeholder="Confirm password"
+            />
+            <small id="repeatPasswordError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label>Assign role <small class="text-warning">Default Superadmin</small></label>
+            <select id="role" class="js-example-basic-single" style="width: 100%">
+              <option value="superadmin">Please assign a role</option>
+              {% for role in roles %}
+              <option value="{{ role }}">{{ role | capitalize }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button id="create-user" type="submit" class="btn btn-primary mr-2"> Submit </button>
+          <div id="user-loading" class="spinner-border text-primary" role="status" style="display:none;">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <button class="btn btn-light">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="footer">
+  <div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"
+      >Copyright © {{year}}</span
+    >
+  </div>
+</footer>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "sub-layout.html" %} 
+
+{% block heading %}
+<div class="page-header">
+  <h3 class="page-title">Payment</h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> Payment </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %} 
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Confirm order payment</h4>
+        <div
+          id="payment-success-message"
+          class="alert alert-success"
+          role="alert"
+          style="display: none"
+        ></div>
+        <div
+          id="payment-error-message"
+          class="alert alert-danger"
+          role="alert"
+          style="display: none"
+        ></div>
+        <form class="forms-sample">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Mode of payment</label>
+            <div class="col-sm-9">
+              <select id="payment-mode" class="form-control">
+                <option value="">Please select mode of payment</option>
+                {% for status in statuses %}
+                <option value="{{ status }}">{{ status | capitalize }}</option>
+                {% endfor %}
+              </select>
+              <small id="paymentError" class="text-danger"></small>
+            </div>
+          </div>
+          <button
+            id="confirm-payment"
+            type="submit"
+            class="btn btn-primary mr-2"
+          >
+            Confirm payment
+          </button>
+          <div id="confirm-loading" class="spinner-border text-primary" role="status" style="display:none;">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <button type="submit" class="btn btn-light">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 
+
+{% block footer %}
+<footer class="footer" style="padding-top: 32%">
+  <div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"
+      >Copyright © {{year}}</span
+    >
+  </div>
+</footer>
+{% endblock %}

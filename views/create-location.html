@@ -1,0 +1,82 @@
+{% extends "sub-layout.html" %} 
+
+{% block heading %}
+<div class="page-header">
+  <h3 class="page-title">Add new location</h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> Location </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %} 
+
+{% block content %}
+<div id="loading" class="row">
+  <div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Add new location</h4>
+        <div id="location-success-message" class="alert alert-success" role="alert" style="display:none;"></div>
+        <div id="location-error-message" class="alert alert-danger" role="alert" style="display:none;"></div>
+        <form class="forms-sample">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="location-name"
+              placeholder="Name"
+            />
+            <small id="locationNameError" class="text-danger"></small>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              type="text"
+              class="form-control"
+              id="description"
+              name="location-description"
+              placeholder="Description"
+              rows="22"
+            ></textarea>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Type of location</label>
+            <div class="col-sm-9">
+              <select id="location-type" class="form-control">
+                <option>Please choose location type</option>
+                {% for type in types %}
+                <option value="{{ type }}">{{ type | capitalize }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <button id="create-location" type="submit" class="btn btn-primary mr-2"> Submit </button>
+          <div
+            id="location-loading"
+            class="spinner-border text-primary"
+            role="status"
+            style="display: none"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+          <button class="btn btn-light">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="footer">
+  <div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"
+      >Copyright © {{year}}</span
+    >
+  </div>
+</footer>
+{% endblock %}

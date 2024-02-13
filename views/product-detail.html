@@ -1,0 +1,79 @@
+{% extends "sub-layout.html" %} {% block heading %}
+<div class="page-header">
+  <h3 class="page-title">Customer & Product</h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Detail
+      </li>
+    </ol>
+  </nav>
+</div>
+{% endblock %} 
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Customer</h4>
+        <p class="card-description"> <code id="name"></code> </p>
+        <div class="row">
+          <div class="col-md-6">
+            <address>
+              <p class="font-weight-bold">Address</p>
+              <p id="address"></p>
+            </address>
+          </div>
+          <div class="col-md-6">
+            <address class="text-primary">
+              <p class="font-weight-bold">E-mail</p>
+              <p id="email" class="mb-2"></p>
+              <p class="font-weight-bold">Phone number</p>
+              <p id="phonenumber"></p>
+            </address>
+          </div>
+        </div>
+      </div>
+      <div id="address2-div" class="card-body" style="display:none;">
+        <h4 class="card-title">Address 2</h4>
+        <p class="card-description"> <code id="address2"></code></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Product</h4>
+        <p class="card-description"> <code id="product-name"></code> </p>
+        <div class="row">
+          <div class="col-md-6">
+            <address class="text-primary">
+              <p class="font-weight-bold">Unit Price</p>
+              <p id="product-unitPrice" class="mb-2"></p>
+              <p class="font-weight-bold">Quantity</p>
+              <p id="product-quantity"></p>
+            </address>
+          </div>
+          <div class="col-md-6">
+            <address>
+              <p id="product-description"></p>
+            </address>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 
+
+{% block footer %}
+<footer class="footer" style="padding-top: 27%">
+  <div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"
+      >Copyright © {{year}}</span
+    >
+  </div>
+</footer>
+{% endblock %}
